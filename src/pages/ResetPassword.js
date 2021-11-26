@@ -8,7 +8,7 @@ import "./styles/styleAuthentication.css";
 class ResetPassword extends Component {
   state = {
     password: "",
-    password2: "",
+    confirmP: "",
 
     showData: true,
     disabled: false,
@@ -17,8 +17,8 @@ class ResetPassword extends Component {
   passwordHandleOnChange = (event) => {
     this.setState({ password: event.target.value });
   }
-  password2HandleOnChange = (event) => {
-    this.setState({ password2: event.target.value });
+  confirmPHandleOnChange = (event) => {
+    this.setState({ confirmP: event.target.value });
   }
   
   
@@ -29,7 +29,7 @@ class ResetPassword extends Component {
     event.preventDefault();
     axios.post(`https://api-kel3.herokuapp.com/reset-password/${id}/${token}`,{
       password: this.state.password,
-      password2: this.state.password2
+      confirmP: this.state.confirmP
     }, {headers: { 'content-type': 'application/json;charset=UTF-8', Authorization: localStorage.getItem('token') }})
     .then((res) => {
       console.log(res)
@@ -54,7 +54,7 @@ class ResetPassword extends Component {
                   placeholder="New Password"  onChange={this.passwordHandleOnChange}/>
               </div>
               <div className="mb-3">
-                <input type="password" name="password" className="form-control" id="password" placeholder="Confrim Password" onChange={this.password2HandleOnChange}/>
+                <input type="password" name="password" className="form-control" id="password" placeholder="Confrim Password" onChange={this.confirmPHandleOnChange}/>
               </div>
               <button class="btn btn-dark button-login" onClick={this.send}>Reset Password</button>
             </form>
